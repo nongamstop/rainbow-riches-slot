@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+:root{
+  --bg:#f6f7fb;
+  --card:#ffffff;
+  --ink:#151823;
+  --muted:#5f6675;
+  --line:#e5e8f0;
+  --soft:#f0f3f9;
+  --accent:#d71920;
+  --accent-dark:#b81218;
+  --gold:#f4b43f;
+  --green:#147a4b;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.65;
+}
+.article{
+  width:min(980px, calc(100% - 28px));
+  margin:0 auto;
+  padding:24px 0 0;
+}
+h1,h2,h3{
+  line-height:1.2;
+  color:#10131c;
+}
+h1{
+  font-size:clamp(2rem, 4vw, 3.2rem);
+  margin:12px 0 8px;
+  letter-spacing:-0.04em;
+}
+h2{
+  font-size:clamp(1.55rem, 3vw, 2.25rem);
+  margin:34px 0 14px;
+  padding-top:8px;
+  border-top:1px solid var(--line);
+}
+h3{
+  font-size:clamp(1.15rem, 2.3vw, 1.45rem);
+  margin:26px 0 10px;
+}
+p{margin:0 0 14px}
+a{color:#0c56c5}
+.hero-intro{
+  background:linear-gradient(135deg,#111827 0%,#252b3a 58%,#4b1f12 100%);
+  color:#fff;
+  border-radius:22px;
+  padding:24px;
+  margin:18px 0 22px;
+  box-shadow:0 14px 34px rgba(19,24,35,.16);
+}
+.hero-intro p{color:#eef2ff}
+.badge-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:14px;
+}
+.badge{
+  display:inline-flex;
+  align-items:center;
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.1);
+  color:#fff;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:.88rem;
+}
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  margin:16px 0;
+  box-shadow:0 8px 22px rgba(17,24,39,.05);
+}
+.fact-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:16px 0;
+}
+.fact{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:14px;
+}
+.fact strong{display:block;margin-bottom:4px}
+.callout{
+  border-left:4px solid var(--gold);
+  background:#fff8e8;
+  border-radius:14px;
+  padding:14px 16px;
+  margin:16px 0;
+}
+.risk{
+  border-left:4px solid var(--accent);
+  background:#fff1f2;
+  border-radius:14px;
+  padding:14px 16px;
+  margin:16px 0;
+}
+.proscons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin:18px 0;
+}
+.proscons div{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:15px;
+}
+ul{padding-left:20px;margin:8px 0 0}
+li{margin:6px 0}
+.product-stack{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin:16px 0 18px;
+}
+.product-card{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:16px;
+  box-shadow:0 8px 22px rgba(17,24,39,.06);
+}
+.product-info{
+  min-width:0;
+}
+.product-name{
+  font-size:1.18rem;
+  font-weight:800;
+  margin-bottom:4px;
+}
+.offer{
+  color:#252b3a;
+  font-weight:700;
+  margin-bottom:4px;
+}
+.features{
+  color:var(--muted);
+  font-size:.95rem;
+}
+.play-btn{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--accent);
+  color:#fff;
+  text-decoration:none;
+  font-weight:800;
+  border-radius:12px;
+  padding:13px 22px;
+  min-width:132px;
+  box-shadow:0 8px 18px rgba(215,25,32,.28);
+}
+.play-btn:hover{background:var(--accent-dark)}
+.table-wrap{
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  margin:16px 0;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+}
+th,td{
+  padding:12px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  vertical-align:top;
+}
+th{background:#f0f3f9}
+tr:last-child td{border-bottom:0}
+.safer{
+  background:#111827;
+  color:#eef2ff;
+  border-radius:18px 18px 0 0;
+  padding:18px;
+  margin-top:30px;
+}
+.safer a{
+  color:#fff;
+  font-weight:700;
+  margin-right:14px;
+  display:inline-block;
+}
+@media(max-width:720px){
+  .fact-grid,.proscons{grid-template-columns:1fr}
+  .product-card{
+    align-items:stretch;
+    flex-direction:column;
+  }
+  .play-btn{
+    width:100%;
+    min-height:48px;
+  }
+  .article{width:min(100% - 20px, 980px)}
+  .hero-intro,.card{padding:16px}
+}
+</style>
+<title>Barcrest Slots UK Guide | Best Barcrest Games to Play</title>
+<meta name="description" content="Explore Barcrest slots for UK players, from Rainbow Riches to Big Bet games, with RTP notes, risk tips and top Barcrest games to try.">
+
+<link rel="canonical" href="https://nongamstop.github.io/rainbow-riches-slot/barcrest-slots-best-for-uk.html">
+<meta name="robots" content="index, follow">
+</head>
+<body>
+<main class="article">
+<h1>Barcrest Slots </h1>
+
+<a href="https://go.affiliatemystake.com/visit/?bta=3132767&nci=5373">
+  <img
+    src="images/barcrest-slots-best-for-uk.webp"
+    alt="Barcrest Slots  Best for UK"
+    width="1200"
+    height="600"
+    style="display:block;width:100%;max-width:1200px;height:auto;border-radius:8px;margin:20px auto;"
+  >
+</a>
+<p style="font-size:0.85em; color:#666;">Last Updated: 7 October 2026 | Verified by iGaming experts</p><br>
+
+<div class="hero-intro">
+<p><strong>Barcrest slots</strong> are proper UK slot history: fruit-machine roots, pub-style bonus trails, cheeky Irish pots, and enough Rainbow Riches spin-offs to fill a damn arcade. The online versions keep that familiar Barcrest gaming feel, but the maths can bite if you treat Big Bet or high-volatility bonus rounds like free money.</p><br>
+<p>The short version: Barcrest games are best for players who enjoy character, recognisable features and medium-paced bonus hunting. They are not the slickest-looking slots next to Nolimit City or Hacksaw, but they still have that “one more spin” pull.</p><br>
+<div class="badge-row">
+<span class="badge">UK-friendly slot catalogue</span>
+<span class="badge">Known for Rainbow Riches</span>
+<span class="badge">RTP often near 95%</span>
+<span class="badge">Big Bet features need discipline</span>
+</div>
+</div>
+
+<h3>Rainbow Riches Megaways</h3>
+<p><strong>Rainbow Riches Megaways</strong> takes Barcrest’s biggest brand and bolts it onto the Big Time Gaming engine. You get up to 117,649 ways, cascading wins, extra symbols in free spins and that familiar leprechaun energy without the old-school fixed-payline feel.</p><br>
+<p>The RTP is commonly listed at <strong>95%</strong>, and the volatility sits high enough to make dead patches feel bloody rude. The upside is obvious: Megaways gives the game proper ceiling. The trade-off is that the base game can chew through a casual £20 balance faster than classic Rainbow Riches Pick n Mix.</p><br>
+<div class="card">
+<strong>Useful detail:</strong> check the game info screen before you spin. Some casinos run alternative RTP settings, and a lower build changes the value of bonus hunting straight away.
+</div>
+
+<h3>Thai Flower</h3>
+<p><strong>Thai Flower</strong> is one of the calmer Barcrest slot games, built around stacked floral symbols, 20 paylines and a more traditional video-slot rhythm. It does not scream at you with a thousand mechanics. Honestly, that is part of the appeal if you want a slot you can read after three spins.</p><br>
+<p>The game usually sits near the <strong>95% RTP</strong> mark, with medium volatility. Wins feel steadier than Megaways, but the top end is less exciting. That is the weakness: Thai Flower is pretty, neat and playable, yet it lacks the “pub fruitie going mental” personality that made Barcrest famous.</p><br>
+
+<h3>Snow Leopard</h3>
+<p><strong>Snow Leopard</strong> is a clean, icy Barcrest casino slot with stacked wilds and a straightforward free spins feature. It is the sort of game that works nicely on mobile because the reels are uncluttered and the symbols stay readable on a smaller screen.</p><br>
+<p>Expect RTP in the <strong>95% region</strong>, with medium volatility. The useful bit: stacked wilds can create chunky screen coverage when they land in the right place, but long gaps between meaningful hits are part of the package. The weakness is theme depth. Snow Leopard looks crisp, but it does not have the brand charm of Rainbow Riches or the Monopoly titles.</p><br>
+
+<h3>Rainbow Riches Pick n Mix</h3>
+<p><strong>Rainbow Riches Pick n Mix</strong> is one of the best examples of Barcrest knowing its audience. Instead of forcing one bonus, it lets you choose from several mini-features, including familiar Rainbow Riches-style pots and prize trails.</p><br>
+<p>The RTP commonly lands near <strong>95%</strong>, and the volatility depends on how you approach the feature choice. Safer picks feel less dramatic. Riskier picks give that lovely “go on, be massive” tension but punish impatience. The concrete tip: do not keep changing feature style because the last one missed. That is gambler’s fallacy wearing a green hat.</p><br>
+
+<h3>Mighty Black Knight</h3>
+<p><strong>Mighty Black Knight</strong> leans into fantasy armour, sword-and-shield symbols and bonus spins with expanding potential. It has a more serious tone than Barcrest’s Irish catalogue, so it suits players who want the provider’s mechanics without leprechauns dancing all over the screen.</p><br>
+<p>The downside is pace. Mighty Black Knight can feel flat when the bonus stays away, and the base game is not as characterful as Rainbow Riches. Still, it has a clear layout, sensible bet controls and enough volatility to keep bonus hunters interested without turning every spin into chaos.</p><br>
+
+<h3>Action Bank</h3>
+<p><strong>Action Bank</strong> is older-school Barcrest through and through: fruit symbols, cash values, ladders and bonus nudges that feel lifted from physical Barcrest slot machines. If you grew up seeing pub cabinets flashing beside the bar, this one scratches that itch.</p><br>
+<p>The trade-off is presentation. Compared with modern barcrest casino slots like Rainbow Riches Megaways, Action Bank looks dated. But it also loads fast, explains itself quickly and does not bury the player under feature menus. That simplicity is still valuable, especially on a lunch-break mobile session.</p><br>
+
+<h2>Big Bet Feature in Barcrest Slots</h2>
+
+<div class="product-stack">
+  <div class="product-card">
+    <div class="product-info">
+      <div class="product-name">DonBet</div>
+      <div class="offer">Welcome offer available for casino players</div>
+      <div class="features">Fast lobby search • Broad slot mix • Check wagering before claiming</div>
+    </div>
+    <a class="play-btn" href="https://go.affiliatemystake.com/visit/?bta=3132767&nci=5373">Play Now</a>
+  </div>
+  <div class="product-card">
+    <div class="product-info">
+      <div class="product-name">MyStake</div>
+      <div class="offer">Casino bonuses and regular slot promotions</div>
+      <div class="features">Crypto-friendly cashier • Live chat is quick • Bonus terms need a careful read</div>
+    </div>
+    <a class="play-btn" href="https://go.affiliatemystake.com/visit/?bta=3132767&nci=5373">Play Now</a>
+  </div>
+  <div class="product-card">
+    <div class="product-info">
+      <div class="product-name">GoldenBet</div>
+      <div class="offer">New-player casino package with slot access</div>
+      <div class="features">Simple layout • Good mobile filtering • Fewer niche titles than huge lobbies</div>
+    </div>
+    <a class="play-btn" href="https://go.affiliatemystake.com/visit/?bta=3132767&nci=5373">Play Now</a>
+  </div>
+  <div class="product-card">
+    <div class="product-info">
+      <div class="product-name">VeloBet</div>
+      <div class="offer">Casino welcome deal plus ongoing promos</div>
+      <div class="features">Clean cashier • Quick registration • Always confirm slot contribution</div>
+    </div>
+    <a class="play-btn" href="https://go.affiliatemystake.com/visit/?bta=3132767&nci=5373">Play Now</a>
+  </div>
+  <div class="product-card">
+    <div class="product-info">
+      <div class="product-name">Rolletto</div>
+      <div class="offer">Casino bonus options for slot players</div>
+      <div class="features">Large provider list • Decent search bar • Promo pages can feel busy</div>
+    </div>
+    <a class="play-btn" href="https://go.affiliatemystake.com/visit/?bta=3132767&nci=5373">Play Now</a>
+  </div>
+</div>
+
+<p>The <strong>Big Bet</strong> feature is Barcrest’s way of saying: “pay more per spin, unlock a juicier version of the game.” It is exciting, but it is also where bankrolls get punched in the ribs. A £0.20 base spin turning into a £1 Big Bet spin changes the session completely.</p><br>
+<p>Risk-wise, treat Big Bet like a separate game mode. If your normal slot budget is £30, do not fire Big Bet spins like they cost the same as base play. They do not. The feature can improve access to bonus extras, enhanced prizes or side mechanics, but it also reduces the number of spins your balance can survive.</p><br>
+<div class="risk">
+<strong>Bankroll rule that actually helps:</strong> split your stake pot first. For example, use 70% on normal spins and keep 30% for Big Bet attempts. When the Big Bet pot is gone, it is gone. No bollocks chasing.
+</div>
+
+<h3>Big Bet in Monopoly: The Big Event</h3>
+<p><strong>Monopoly: The Big Event</strong> is one of the better-known Barcrest games using the Big Bet idea. The licence gives it instant familiarity, with board-game visuals, property-style rewards and that satisfying Monopoly sound design. The Big Bet option boosts the drama because every spin feels closer to an event trigger.</p><br>
+<p>The issue is cost-per-decision. It is very easy to justify the higher stake because the Monopoly skin feels friendly. That is the trap. The game has an RTP commonly shown near <strong>95%</strong>, but RTP does not protect a short session from variance. If you only have ten Big Bet spins in the tank, the maths has very little time to behave.</p><br>
+
+<h2>The Rainbow Riches Phenomenon</h2>
+<p><strong>Rainbow Riches</strong> became the Barcrest flagship because it blended familiar UK fruit-machine ideas with an instantly recognisable Irish theme. Pots of gold, cheeky bonus names, simple gamble choices and colourful screens made it feel approachable even to players who did not care about paylines or volatility.</p><br>
+<p>By the way, the brand works because it is readable. You know when a feature is close, you know what the symbols mean, and you know the game wants you to chase that pot. That clarity is powerful. The weakness is repetition: after enough spin-offs, some Rainbow Riches titles feel like remixes rather than fresh ideas.</p><br>
+
+<h3>Loads of Spinoffs</h3>
+<p>There are loads of Rainbow Riches spin-offs: <strong>Rainbow Riches Reels of Gold</strong>, <strong>Rainbow Riches Pots of Gold</strong>, <strong>Rainbow Riches Megaways</strong>, <strong>Rainbow Riches Pick n Mix</strong> and more. Each one tweaks the formula, but the core promise stays the same: bright visuals, Irish bonus energy and a feature that looks closer than it truly is.</p><br>
+<p>If you like this, try that: <strong>Lucky Larry’s Lobstermania 2</strong> if you want an old-school character slot with bonus charm, though its pacing feels dated; <strong>Fishin’ Frenzy</strong> if you like simple collection tension, but the base game is brutally plain; <strong>Book of Dead</strong> if you want higher volatility and a famous expanding-symbol feature, although it can be ice cold for long stretches.</p><br>
+<div class="callout">
+<strong>Mini comparison:</strong> Rainbow Riches is warmer and more playful than Book of Dead, busier than Fishin’ Frenzy, and less polished than the newest Pragmatic Play releases. Its edge is personality, not cutting-edge animation.
+</div>
+
+<h2>Top RTP Slots from Barcrest</h2>
+<p>RTP matters, but it is not the whole story. A 95% Barcrest slot can feel friendlier than a 96% bruiser if the volatility is lower and the bonus frequency is kinder. Still, UK players should always open the paytable because barcrest casino versions can run different RTP profiles by operator.</p><br>
+<p>The strongest approach is to combine RTP with stake control. A higher-paying slot does not excuse oversized bets. Honestly, RTP is long-term theory; your Saturday night balance lives in short-term variance.</p><br>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Barcrest slot</th>
+<th>Common RTP area</th>
+<th>Volatility feel</th>
+<th>Main trade-off</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rainbow Riches Megaways</td>
+<td>95%</td>
+<td>High</td>
+<td>Big potential, rough base-game droughts</td>
+</tr>
+<tr>
+<td>Thai Flower</td>
+<td>95%</td>
+<td>Medium</td>
+<td>Smoother play, lower excitement ceiling</td>
+</tr>
+<tr>
+<td>Snow Leopard</td>
+<td>95%</td>
+<td>Medium</td>
+<td>Readable mobile play, lighter theme personality</td>
+</tr>
+<tr>
+<td>Monopoly: The Big Event</td>
+<td>95% range</td>
+<td>Medium-high</td>
+<td>Fun licence, Big Bet can drain funds fast</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h3>Average RTP from Barcrest Games</h3>
+<p>The average RTP from Barcrest games tends to sit in the <strong>95% band</strong>. That is a bit lower than the 96% many slot nerds love to see, but it is not automatically poor. The problem starts when a casino uses a reduced RTP build and the player never checks.</p><br>
+<p>Concrete habit: tap the info icon before the first paid spin. On mobile, it is usually tucked near the menu or three-line icon. The search bar actually works at many modern casinos too, so type “Barcrest” or “Rainbow Riches” instead of scrolling through 2,000 games like a lost tourist.</p><br>
+
+<h3>Higher Paying Slots</h3>
+<p>Within the Barcrest catalogue, higher-paying titles are less about giant advertised RTP and more about picking games with sensible volatility for your budget. Thai Flower and Snow Leopard suit smaller sessions better than Rainbow Riches Megaways, because the bankroll does not face the same level of swing.</p><br>
+<p>A common mistake is chasing the slot with the flashiest max win while ignoring bet size. Another is turning on turbo spin while distracted; the spin button is a menace on mobile when your thumb gets lazy. Keep animation speed normal until you understand how quickly the balance drops.</p><br>
+
+<div class="risk">
+<strong>Common mistakes with Barcrest slots:</strong>
+<ul>
+<li>Using Big Bet from spin one without setting a separate limit.</li>
+<li>Assuming every Rainbow Riches game has the same RTP and volatility.</li>
+<li>Playing bonus money without checking whether Barcrest slot games contribute 100% to wagering.</li>
+</ul>
+</div>
+
+<h2>Acquisition by Scientific Games</h2>
+<p>Barcrest was acquired by <strong>Scientific Games</strong> in 2011, which pushed the brand deeper into online distribution and larger casino networks. Scientific Games later became part of the wider Light &amp; Wonder identity, but Barcrest remains the name players connect with Rainbow Riches and classic UK slot design.</p><br>
+<p>The upside of that acquisition was reach. Barcrest content appeared across more online casinos, with stronger platform support and smoother delivery. The trade-off is that the old Barcrest identity feels less independent now. Some newer releases carry the mechanics forward, but the gritty pub-machine soul is less obvious than it was on physical cabinets.</p><br>
+
+<h2>Why play Barcrest slots?</h2>
+<p>Play Barcrest slots if you want familiar UK-style games with clear features, recognisable brands and low learning curves. They are not the wildest slots online, and they rarely look as cinematic as modern releases from ELK, Push Gaming or Relax Gaming. But they are easy to understand, quick to load and full of small feature teases.</p><br>
+
+<div class="proscons">
+<div>
+<strong>What works</strong>
+<ul>
+<li>Rainbow Riches remains instantly recognisable.</li>
+<li>Most games explain wins and bonuses clearly.</li>
+<li>Good fit for mobile portrait play and quick sessions.</li>
+<li>Classic barcrest slot machines fans get real nostalgia.</li>
+</ul>
+</div>
+<div>
+<strong>What to watch</strong>
+<ul>
+<li>RTP often sits near 95%, not premium territory.</li>
+<li>Big Bet modes raise session risk fast.</li>
+<li>Some older games look dated beside newer providers.</li>
+<li>Spin-off fatigue is real with Rainbow Riches.</li>
+</ul>
+</div>
+</div>
+
+<p>Payment options depend on the casino, not Barcrest itself. You will usually see compact cashier choices like 💳 Debit Card, 🏦 Bank Transfer, ₿ Bitcoin, Ξ Ethereum, 📱 Apple Pay and 💼 e-wallets. One crypto casino test we ran elsewhere had a Bitcoin withdrawal land in 6 hours, but do not treat that as a promise for every operator.</p><br>
+<p>The best practical setup is simple: choose a licensed casino, search for “barcrest”, open the paytable, set a loss limit, then start low. If the bonus does not land, walk away before the game turns into a personal argument.</p><br>
+
+<h2>FAQs</h2>
+<p>Quick answers first, no waffle. Barcrest has a long UK slot history, but online play still needs the same checks: RTP, stake size, bonus terms and safer gambling tools.</p><br>
+
+<h3>Are Barcrest owned by Scientific Games?</h3>
+<p>Yes. Barcrest was acquired by Scientific Games in 2011. Scientific Games later moved under the Light &amp; Wonder name, but players still recognise Barcrest as the studio behind Rainbow Riches and several classic UK-style slots.</p><br>
+<p>Practical tip: if you cannot find Barcrest in a casino lobby, search for Rainbow Riches instead. Casinos often list the famous game brand more clearly than the studio name.</p><br>
+
+<h3>Do Barcrest make Rainbow Riches Slots?</h3>
+<p>Yes. Rainbow Riches is the signature Barcrest slot family. It includes titles such as Rainbow Riches Megaways, Rainbow Riches Pick n Mix and Rainbow Riches Reels of Gold.</p><br>
+<p>Practical tip: do not assume all Rainbow Riches games play the same. Megaways is swingier, Pick n Mix gives more choice, and older versions feel closer to traditional UK fruit machines.</p><br>
+
+<h3>When were Barcrest founded?</h3>
+<p>Barcrest was founded in 1968. The company built its reputation through land-based fruit machines before becoming a familiar name in online casino slots.</p><br>
+<p>Practical tip: if you enjoy older cabinet-style gameplay, Action Bank and classic Rainbow Riches titles feel closer to those roots than the newer Megaways releases.</p><br>
+
+<h3>Do Barcrest slots have fair RTPs?</h3>
+<p>Yes, Barcrest slots generally have fair RTPs, with many online titles sitting near 95%. That is playable, but it is not the highest band in the market.</p><br>
+<p>Practical tip: always check the in-game paytable before wagering. A casino can offer a different RTP version, and that tiny percentage difference matters over long play.</p><br>
+
+
+<div class="internal-links">
+  <h3>Read also</h3>
+  <ul>
+    <li><a href="index.html">Rainbow Riches Sites Not on GamStop</a></li>
+  </ul>
+</div>
+<div class="safer">
+<strong>Safer Gambling:</strong>
+<p>Slots are entertainment, not income. Set limits, take breaks and stop if the fun has gone. If gambling feels hard to control, use blocking tools and speak to a support service.</p><br>
+<a href="https://www.begambleaware.org/">BeGambleAware</a>
+<a href="https://www.gamcare.org.uk/">GamCare</a>
+<a href="https://www.gamblingcommission.gov.uk/">UKGC</a>
+<a href="https://www.gamstop.co.uk/">GamStop</a>
+</div>
+</main>
+</body>
+</html>
